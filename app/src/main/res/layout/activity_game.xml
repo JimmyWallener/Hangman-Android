@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".GameActivity">
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="77dp"
+        android:layout_height="23dp"
+        android:text="@string/timer"
+        android:textColor="@color/colorPrimaryText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.027" />
+
+    <TextView
+        android:id="@+id/wToGuess"
+        android:layout_width="306dp"
+        android:layout_height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.58" />
+
+    <EditText
+        android:id="@+id/enterGuess"
+        android:layout_width="315dp"
+        android:layout_height="59dp"
+        app:layout_constraintBottom_toTopOf="@+id/quitGame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wToGuess"
+        app:layout_constraintVertical_bias="0.48" />
+
+    <Button
+        android:id="@+id/showStats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:onClick="showStats"
+        android:text="@string/show_stats"
+        app:layout_constraintBaseline_toBaselineOf="@+id/quitGame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/quitGame" />
+
+    <Button
+        android:id="@+id/quitGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="48dp"
+        android:onClick="quitGame"
+        android:text="@string/quit_game"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/showStats"
+        app:layout_constraintStart_toEndOf="@+id/resetGame" />
+
+    <Button
+        android:id="@+id/resetGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:onClick="resetGame"
+        android:text="@string/reset_game"
+        app:layout_constraintBaseline_toBaselineOf="@+id/quitGame"
+        app:layout_constraintEnd_toStartOf="@+id/quitGame"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

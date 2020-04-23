@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Hangman</string>
+    <string name="start_game">Start Game</string>
+    <string name="show_stats">Show Stats</string>
+    <string name="timer">Timer</string>
+    <string name="reset_game">Reset Game</string>
+    <string name="return_to_game">Continue playing</string>
+    <string name="guessed_letters">Guessed Letters: </string>
+    <string name="quit_game">Quit Game</string>
+    <string name="game_rules">Welcome to a game of Hangman!\n\nWhen you start the game, you start the countdown timer.\n
+    Guess as many times you want, but when time is up, you lose. \n\n Timer setting: 180 seconds</string>
+
+</resources>
