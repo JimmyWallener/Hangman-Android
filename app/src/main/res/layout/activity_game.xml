@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="@drawable/background"
     tools:context=".GameActivity">
 
     <TextView
         android:id="@+id/timer"
-        android:layout_width="77dp"
+        android:layout_width="150dp"
         android:layout_height="23dp"
         android:text="@string/timer"
         android:textColor="@color/colorPrimaryText"
@@ -21,28 +22,35 @@
         app:layout_constraintVertical_bias="0.027" />
 
     <TextView
-        android:id="@+id/wToGuess"
+        android:id="@+id/word_to_guess"
         android:layout_width="306dp"
-        android:layout_height="50dp"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:textAlignment="gravity"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.58" />
+        app:layout_constraintVertical_bias="0.73" />
 
     <EditText
-        android:id="@+id/enterGuess"
+        android:id="@+id/enter_guess"
         android:layout_width="315dp"
         android:layout_height="59dp"
-        app:layout_constraintBottom_toTopOf="@+id/quitGame"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/enter_guess"
+        android:textColor="@color/colorPrimaryText"
+        app:layout_constraintBottom_toTopOf="@+id/quit_game"
+        app:layout_constraintEnd_toStartOf="@+id/guess_btn"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wToGuess"
-        app:layout_constraintVertical_bias="0.48" />
+        app:layout_constraintTop_toBottomOf="@+id/word_to_guess"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/showStats"
+        android:id="@+id/show_stats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -51,12 +59,12 @@
         android:layout_marginRight="24dp"
         android:onClick="showStats"
         android:text="@string/show_stats"
-        app:layout_constraintBaseline_toBaselineOf="@+id/quitGame"
+        app:layout_constraintBaseline_toBaselineOf="@+id/quit_game"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/quitGame" />
+        app:layout_constraintStart_toEndOf="@+id/quit_game" />
 
     <Button
-        android:id="@+id/quitGame"
+        android:id="@+id/quit_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -67,20 +75,67 @@
         android:onClick="quitGame"
         android:text="@string/quit_game"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/showStats"
-        app:layout_constraintStart_toEndOf="@+id/resetGame" />
+        app:layout_constraintEnd_toStartOf="@+id/show_stats"
+        app:layout_constraintStart_toEndOf="@+id/reset_game" />
 
     <Button
-        android:id="@+id/resetGame"
+        android:id="@+id/reset_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:onClick="resetGame"
         android:text="@string/reset_game"
-        app:layout_constraintBaseline_toBaselineOf="@+id/quitGame"
-        app:layout_constraintEnd_toStartOf="@+id/quitGame"
+        android:onClick="resetGame"
+        app:layout_constraintBaseline_toBaselineOf="@+id/quit_game"
+        app:layout_constraintEnd_toStartOf="@+id/quit_game"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/counter"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="128dp"
+        android:layout_marginRight="128dp"
+        android:textColor="@color/colorPrimaryText"
+        app:layout_constraintBottom_toTopOf="@+id/word_to_guess"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.153"
+        app:layout_constraintStart_toEndOf="@+id/attempts_left" />
+
+    <TextView
+        android:id="@+id/attempts_left"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:text="@string/attempts"
+        android:textColor="@color/colorPrimaryText"
+        app:layout_constraintBaseline_toBaselineOf="@+id/counter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/hangman_picture"
+        android:layout_width="365dp"
+        android:layout_height="316dp"
+        app:layout_constraintBottom_toTopOf="@+id/attempts_left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.746"
+         />
+
+    <ImageView
+        android:id="@+id/guess_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:onClick="checkWord"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hangman_picture"
+        app:layout_constraintVertical_bias="0.539"
+        app:srcCompat="@android:drawable/ic_media_play" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

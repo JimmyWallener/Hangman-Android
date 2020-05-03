@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 public class ResultsActivity extends AppCompatActivity {
 
@@ -12,10 +13,14 @@ public class ResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
-    }
 
-    public void returnToGame(View view) {
+        TextView guessedLetters = findViewById(R.id.guessedLetters);
+        TextView guessedWords = findViewById(R.id.guessedWords);
 
-        startActivity(new Intent(ResultsActivity.this, GameActivity.class));
+        Intent intent = getIntent();
+
+        guessedLetters.setText((intent.getStringExtra("guessedLetters")));
+        guessedWords.setText((intent.getStringExtra("guessedWords")));
+
     }
 }

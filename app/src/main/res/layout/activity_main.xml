@@ -33,7 +33,7 @@
         app:srcCompat="@drawable/hangman_dude" />
 
     <Button
-        android:id="@+id/startGame"
+        android:id="@+id/start_game"
         android:layout_width="124dp"
         android:layout_height="67dp"
         android:layout_marginTop="24dp"
@@ -44,16 +44,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameRules" />
+        app:layout_constraintTop_toBottomOf="@+id/game_rules" />
 
     <TextView
-        android:id="@+id/gameRules"
+        android:id="@+id/game_rules"
         android:layout_width="224dp"
         android:layout_height="132dp"
         android:layout_marginTop="32dp"
         android:text="@string/game_rules"
         android:textColor="@color/colorPrimaryText"
-        app:layout_constraintBottom_toTopOf="@+id/startGame"
+        app:layout_constraintBottom_toTopOf="@+id/start_game"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
