@@ -5,45 +5,34 @@ import android.content.Context;
 import android.os.CountDownTimer;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
 import java.util.concurrent.TimeUnit;
-
 
 import se.gritacademy.hangman.R;
 
 
 public class ClockCountDown {
 
-    TextView countdown_timer;
+    private TextView countdown_timer;
     private Context context;
     private CountDownTimer counter;
-    private int time;
+    private int time = 180000;
 
     public ClockCountDown(Context context) {
         this.context = context;
     }
 
-    public int getTime() {
-        return time;
-    }
 
-    public void setTime(int time) {
-        this.time = time;
-    }
+    public void clock() {
 
-    public void clock(int timer) {
-        setTime(timer);
+        countdown_timer = ((Activity) context).findViewById(R.id.timer);
+        counter = new CountDownTimer(time, 1000) {
 
-
-       countdown_timer = ((Activity) context).findViewById(R.id.timer);
-        counter = new CountDownTimer(timer, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
 
                 time--;
-                countdown_timer.setText("" + String.format("%d min, %d sec",
+                countdown_timer.setText(String.format("%d min, %d sec",
                         TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
                         TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
                                 TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));

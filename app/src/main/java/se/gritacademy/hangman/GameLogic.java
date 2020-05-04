@@ -3,7 +3,6 @@ package se.gritacademy.hangman;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,7 +18,7 @@ public class GameLogic  {
         public StringBuilder usedLetters = new StringBuilder();
         public StringBuilder usedWords = new StringBuilder();
         public StringBuilder wordAsChar = new StringBuilder();
-        public int counter = 8;
+        public int counter = 0;
         public Context context;
         String filePath = "wordlist.txt";
         List<String> listOfWords = new ArrayList<>();
@@ -30,7 +29,8 @@ public class GameLogic  {
         }
 
         // Lets create a game from a wordfile and randomize it
-    public void playGame(){
+    public void playGame(int counter){
+            this.counter = counter;
             createList(filePath);
             Random random = new Random();
             wordInPlay = listOfWords.get(random.nextInt(listOfWords.size()));

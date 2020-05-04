@@ -13,6 +13,7 @@
     <string name="enter_guess">Single Letter Or Whole Word</string>
     <string name="guess_btn">Click To Guess</string>
     <string name="attempts">Guesses Left: </string>
-    <string name="word_was">\"Word Was: \"</string>
+    <string name="word_was">Word Was:\n </string>
+    <string name="you_won">You Nailed it!\n Reset for new game</string>
 
 </resources>

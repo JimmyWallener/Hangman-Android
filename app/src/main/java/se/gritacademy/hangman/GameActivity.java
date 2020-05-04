@@ -2,6 +2,8 @@ package se.gritacademy.hangman;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -19,14 +21,9 @@ import se.gritacademy.hangman.graphics.HangmanModel;
 public class GameActivity extends AppCompatActivity {
 
     final public String TAG = "GameActivity";
-    public int setAmountOfTime = 180000;
-    public int triesLeft;
     public TextView counter_text;
     public TextView word_to_guess;
     public TextView clockCountDown;
-    public String wordInPlay;
-    public String wordAsChar;
-    public String usedLetters;
     public ImageView image;
     public ImageView guess_btn;
     public EditText enter_guess;
@@ -39,48 +36,35 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        gameLogic.playGame();
+        gameLogic.playGame(8);
         clockCountDown = findViewById(R.id.timer);
         image = findViewById(R.id.hangman_picture);
         word_to_guess = findViewById(R.id.word_to_guess);
         guess_btn = findViewById(R.id.guess_btn);
         enter_guess = findViewById(R.id.enter_guess);
         counter_text = findViewById(R.id.counter);
-        triesLeft = gameLogic.counter;
-        wordInPlay = gameLogic.wordInPlay;
 
-
-
-        countDown.clock(setAmountOfTime);
+        countDown.clock();
         image.setImageResource(hangman.hangmanPictures(gameLogic.counter));
-        wordAsChar = gameLogic.wordAsChar.toString();
-        word_to_guess.setText(wordAsChar);
+
+        word_to_guess.setText(gameLogic.wordAsChar.toString());
         counter_text.setText(String.valueOf(gameLogic.counter));
 
-        Log.d(TAG, "word as char " + wordAsChar);
-
-        Log.d(TAG, "word in play " + wordInPlay);
-
-
-
-
+        Log.d(TAG, "onCreate Word in Play: " + gameLogic.wordInPlay);
+        Log.d(TAG, "onCreate Used Letters: " + gameLogic.usedLetters);
     }
+
         @Override
     protected void onStart(){
         super.onStart();
 
-        SharedPreferences prefs = getSharedPreferences("GameSaved", MODE_PRIVATE);
-
-        wordInPlay = prefs.getString("WORD", "defValue");
-        usedLetters = prefs.getString("GUESSED_LETTERS", "defValue");
-        triesLeft = prefs.getInt("TRIES_LEFT", 8);
         countDown.startClock();
 
 
         Log.d(TAG,"onStarted invoked" +getLocalClassName());
-        Log.d(TAG, "onStart Word in Play: " + wordInPlay);
-        Log.d(TAG, "onStart Used Letters: " + usedLetters);
-        Log.d(TAG, "onStart Time: " + countDown.getTime());
+        Log.d(TAG, "onStart Word in Play: " + gameLogic.wordInPlay);
+        Log.d(TAG, "onStart Used Letters: " + gameLogic.usedLetters);
+
 
 
 
@@ -93,6 +77,7 @@ public class GameActivity extends AppCompatActivity {
         editor.putString("WORD", gameLogic.wordInPlay);
         editor.putString("GUESSED_LETTERS", String.valueOf(gameLogic.usedLetters));
         editor.putInt("TRIES_LEFT", gameLogic.counter);
+
         editor.apply();
         editor.commit();
         countDown.stopClock();
@@ -103,18 +88,16 @@ public class GameActivity extends AppCompatActivity {
         Log.d(TAG, "onPause Used Letters: " + gameLogic.usedLetters);
 
 
+
     }
 
+    @SuppressLint("SetTextI18n")
     public void checkWord(View view) {
 
         if (enter_guess.getText().toString().isEmpty()) {
             enter_guess.setError("Blank Field!");
         }
-        if (gameLogic.counter == 0) {
-            image.setImageResource(hangman.hangmanPictures(gameLogic.counter));
-            word_to_guess.setText(getString(R.string.word_was) + gameLogic.wordInPlay);
 
-        }
         if (gameLogic.usedLetters.toString().contains(enter_guess.getText().toString())
                 || (gameLogic.usedWords.toString().contains(enter_guess.getText().toString()))) {
             Toast.makeText(this,"Already Guessed That", Toast.LENGTH_SHORT).show();
@@ -127,8 +110,13 @@ public class GameActivity extends AppCompatActivity {
 
         if (enter_guess.getText().toString().equals(gameLogic.wordInPlay)
                 || word_to_guess.getText().toString().equals(gameLogic.wordInPlay)){
-            word_to_guess.setText("You Nailed it!\n Reset for new game");
+            word_to_guess.setText(getString(R.string.you_won));
             gameLogic.wordAsChar.setLength(0);
+        }
+        if (gameLogic.counter == 0) {
+            image.setImageResource(hangman.hangmanPictures(gameLogic.counter));
+            word_to_guess.setText(getString(R.string.word_was) + gameLogic.wordInPlay);
+
         }
 
 
@@ -153,20 +141,19 @@ public class GameActivity extends AppCompatActivity {
     // Restarts game and resets all values
     public void resetGame(View view) {
 
-        gameLogic.playGame();
+        gameLogic.playGame(8);
 
-        wordAsChar = gameLogic.wordAsChar.toString();
-        word_to_guess.setText(wordAsChar);
-        gameLogic.counter = 8;
+
+        word_to_guess.setText(gameLogic.wordAsChar.toString());
         image.setImageResource(hangman.hangmanPictures(gameLogic.counter));
         gameLogic.usedLetters.setLength(0);
         gameLogic.usedWords.setLength(0);
         enter_guess.getText().clear();
-        countDown.clock(setAmountOfTime);
+        countDown.clock();
 
-        Log.d(TAG,"After Reset : " + wordAsChar + " or " + gameLogic.wordAsChar);
-        Log.d(TAG,"After Reset : " + wordInPlay + " or " + gameLogic.wordInPlay);
-        Log.d(TAG,"After Reset : " + usedLetters + " or " + gameLogic.usedLetters);
+        Log.d(TAG,"After Reset : "  + gameLogic.wordAsChar);
+        Log.d(TAG,"After Reset : "  + gameLogic.wordInPlay);
+        Log.d(TAG,"After Reset : "  + gameLogic.usedLetters);
     }
 
     public void quitGame(View view) {
