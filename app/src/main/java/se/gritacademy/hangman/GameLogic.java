@@ -29,8 +29,7 @@ public class GameLogic  {
             this.context = context;
         }
 
-
-
+        // Lets create a game from a wordfile and randomize it
     public void playGame(){
             createList(filePath);
             Random random = new Random();
@@ -41,7 +40,10 @@ public class GameLogic  {
             }
 
         }
+        /* First remove whitespaces and set to lowercase. Then check if letter is in word
+         if letter is there, switch it out. Store letter and word separate
 
+         */
      public void checkWord(String letter) {
 
             letter = letter.toLowerCase().trim();
@@ -62,7 +64,7 @@ public class GameLogic  {
      }
 
 
-
+        // Create a file reader using AssetManager and store the output words in an array
         public List<String> createList(String path) {
 
             AssetManager am = context.getAssets();

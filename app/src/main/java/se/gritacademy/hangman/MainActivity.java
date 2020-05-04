@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         anim.setRepeatCount(Animation.INFINITE);
         anim.setDuration(700);
 
-// Start animating the image
+    // Start animating the image
         final ImageView splash = (ImageView) findViewById(R.id.hangedMan);
         splash.startAnimation(anim);
     }

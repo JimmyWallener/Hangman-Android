@@ -39,21 +39,19 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        gameLogic.playGame();
         clockCountDown = findViewById(R.id.timer);
         image = findViewById(R.id.hangman_picture);
         word_to_guess = findViewById(R.id.word_to_guess);
         guess_btn = findViewById(R.id.guess_btn);
         enter_guess = findViewById(R.id.enter_guess);
         counter_text = findViewById(R.id.counter);
-
-
-
-        gameLogic.playGame();
-        countDown.clock(setAmountOfTime);
-
-
         triesLeft = gameLogic.counter;
         wordInPlay = gameLogic.wordInPlay;
+
+
+
+        countDown.clock(setAmountOfTime);
         image.setImageResource(hangman.hangmanPictures(gameLogic.counter));
         wordAsChar = gameLogic.wordAsChar.toString();
         word_to_guess.setText(wordAsChar);
@@ -90,6 +88,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+
         SharedPreferences.Editor editor = getSharedPreferences("GameSaved", MODE_PRIVATE).edit();
         editor.putString("WORD", gameLogic.wordInPlay);
         editor.putString("GUESSED_LETTERS", String.valueOf(gameLogic.usedLetters));
@@ -142,6 +141,7 @@ public class GameActivity extends AppCompatActivity {
         enter_guess.getText().clear();
 
     }
+    // Sends over guessed words and letters to result page
     public void showStats(View view) {
         Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
 
@@ -150,7 +150,7 @@ public class GameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    // Restarts game and resets all values
     public void resetGame(View view) {
 
         gameLogic.playGame();
@@ -168,6 +168,7 @@ public class GameActivity extends AppCompatActivity {
         Log.d(TAG,"After Reset : " + wordInPlay + " or " + gameLogic.wordInPlay);
         Log.d(TAG,"After Reset : " + usedLetters + " or " + gameLogic.usedLetters);
     }
+
     public void quitGame(View view) {
 
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
